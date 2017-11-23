@@ -82,4 +82,11 @@
         android:id="@+id/buttonresetpassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <Button
+        android:layout_centerInParent="true"
+        android:layout_below="@id/buttonresetpassword"
+        android:text="Phone number"
+        android:id="@+id/buttonphonenumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </RelativeLayout>

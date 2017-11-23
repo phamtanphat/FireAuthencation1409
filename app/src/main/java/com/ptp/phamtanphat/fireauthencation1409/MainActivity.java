@@ -18,9 +18,10 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText edtuser,edtpassword,edtemail;
-    Button btndangky,btndangnhap,btngetuser,btncapnhat,btnxacthuc;
+    EditText edtuser, edtpassword, edtemail;
+    Button btndangky, btndangnhap, btngetuser, btncapnhat, btnxacthuc, btnresetpassword;
     private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,29 +31,29 @@ public class MainActivity extends AppCompatActivity {
         btndangky.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mAuth.createUserWithEmailAndPassword(getmail(),getpassword())
+                mAuth.createUserWithEmailAndPassword(getmail(), getpassword())
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(MainActivity.this, "Dang ky thanh cong", Toast.LENGTH_SHORT).show();
-                        }else {
-                            Toast.makeText(MainActivity.this, "Dang ky that bai", Toast.LENGTH_SHORT).show();
-                            Log.d("BBB",task.getException().toString());
-                        }
-                    }
-                });
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(MainActivity.this, "Dang ky thanh cong", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(MainActivity.this, "Dang ky that bai", Toast.LENGTH_SHORT).show();
+                                    Log.d("BBB", task.getException().toString());
+                                }
+                            }
+                        });
             }
         });
         btndangnhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mAuth.signInWithEmailAndPassword(getmail(),getpassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                mAuth.signInWithEmailAndPassword(getmail(), getpassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             Toast.makeText(MainActivity.this, "Dang nhap thanh cong", Toast.LENGTH_SHORT).show();
-                        }else {
+                        } else {
                             Toast.makeText(MainActivity.this, "Khong co tai khoan nay", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -64,9 +65,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if (user != null) {
-                    Toast.makeText(MainActivity.this,"Ten " + user.getDisplayName()
-                                                            +"\nEmail " + user.getEmail()
-                                                            +"\nPhoneNumber" + user.getPhoneNumber(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Ten " + user.getDisplayName()
+                            + "\nEmail " + user.getEmail()
+                            + "\nPhoneNumber" + user.getPhoneNumber(), Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(MainActivity.this, "Khong co nguoi dung", Toast.LENGTH_SHORT).show();
 
@@ -77,16 +78,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if (user != null){
+                if (user != null) {
                     UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
                             .setDisplayName("Pham Tan Phat")
                             .build();
                     user.updateProfile(profileChangeRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 Toast.makeText(MainActivity.this, "cap nhat thanh cong", Toast.LENGTH_SHORT).show();
-                            }else {
+                            } else {
                                 Toast.makeText(MainActivity.this, "That bai", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -98,29 +99,49 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if (user != null){
+                if (user != null) {
                     user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 Toast.makeText(MainActivity.this, "Da gui email xac thuc", Toast.LENGTH_SHORT).show();
-                            }else {
+                            } else {
                                 Toast.makeText(MainActivity.this, "Khong gui duoc email", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
-                }else {
+                } else {
                     Toast.makeText(MainActivity.this, "Khong co nguoi dung xac thuc", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+        btnresetpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                FirebaseUser user = auth.getCurrentUser();
+
+                auth.sendPasswordResetEmail(user.getEmail())
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(MainActivity.this, "Da gui mail reset password", Toast.LENGTH_SHORT).show();
+                                }else {
+                                    Toast.makeText(MainActivity.this, "That bai", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
             }
         });
     }
 
     //Get email
-    public String getmail(){
+    public String getmail() {
         return edtuser.getText().toString();
     }
-    public String getpassword(){
+
+    public String getpassword() {
         return edtpassword.getText().toString();
     }
 
@@ -133,5 +154,6 @@ public class MainActivity extends AppCompatActivity {
         btncapnhat = findViewById(R.id.buttcapnhat);
         btnxacthuc = findViewById(R.id.buttonxacthuc);
         edtemail = findViewById(R.id.edittextemail);
+        btnresetpassword = findViewById(R.id.buttonresetpassword);
     }
 }
