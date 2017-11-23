@@ -13,11 +13,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
     EditText edtuser,edtpassword;
-    Button btndangky,btndangnhap;
+    Button btndangky,btndangnhap,btngetuser;
     private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,20 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
+        btngetuser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user != null) {
+                    Toast.makeText(MainActivity.this,"Ten " + user.getDisplayName()
+                                                            +"\nEmail " + user.getEmail()
+                                                            +"\nPhoneNumber" + user.getPhoneNumber(), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "Khong co nguoi dung", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
     }
 
     //Get email
@@ -72,5 +87,6 @@ public class MainActivity extends AppCompatActivity {
         edtpassword = findViewById(R.id.edittextpassword);
         btndangky = findViewById(R.id.buttondangky);
         btndangnhap = findViewById(R.id.buttondangnhap);
+        btngetuser = findViewById(R.id.buttongetuser);
     }
 }

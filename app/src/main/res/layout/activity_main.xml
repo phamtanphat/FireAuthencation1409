@@ -43,4 +43,20 @@
         android:text="Dang nhap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <Button
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/buttondangnhap"
+        android:layout_alignBaseline="@id/buttondangky"
+        android:text="Get User"
+        android:id="@+id/buttongetuser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:textSize="10sp"
+        android:layout_toRightOf="@id/buttongetuser"
+        android:layout_alignBaseline="@id/buttondangky"
+        android:text="Cap nhat"
+        android:id="@+id/buttcapnhat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </RelativeLayout>
