@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ptp.phamtanphat.fireauthencation1409.MainActivity">
+
+    <TextView
+        android:id="@+id/textviewtitle"
+        android:gravity="center"
+        android:textColor="#f20"
+        android:text="Thong tin khach hang"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+   <EditText
+       android:layout_margin="5dp"
+       android:id="@+id/edittextusername"
+       android:hint="Nhap username"
+       android:layout_below="@id/textviewtitle"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content" />
+    <EditText
+        android:layout_margin="5dp"
+        android:id="@+id/edittextpassword"
+        android:hint="Nhap password"
+        android:layout_below="@id/edittextusername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:layout_margin="5dp"
+        android:layout_below="@id/edittextpassword"
+        android:text="Dang ky"
+        android:id="@+id/buttondangky"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/buttondangnhap"
+        android:layout_toRightOf="@id/buttondangky"
+        android:layout_alignBaseline="@id/buttondangky"
+        android:text="Dang nhap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
