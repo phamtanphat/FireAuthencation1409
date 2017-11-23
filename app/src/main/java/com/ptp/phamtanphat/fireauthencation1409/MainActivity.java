@@ -14,11 +14,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class MainActivity extends AppCompatActivity {
 
     EditText edtuser,edtpassword;
-    Button btndangky,btndangnhap,btngetuser;
+    Button btndangky,btndangnhap,btngetuser,btncapnhat;
     private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,27 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        btncapnhat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user != null){
+                    UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
+                            .setDisplayName("Pham Tan Phat")
+                            .build();
+                    user.updateProfile(profileChangeRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()){
+                                Toast.makeText(MainActivity.this, "cap nhat thanh cong", Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast.makeText(MainActivity.this, "That bai", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            }
+        });
     }
 
     //Get email
@@ -88,5 +110,6 @@ public class MainActivity extends AppCompatActivity {
         btndangky = findViewById(R.id.buttondangky);
         btndangnhap = findViewById(R.id.buttondangnhap);
         btngetuser = findViewById(R.id.buttongetuser);
+        btncapnhat = findViewById(R.id.buttcapnhat);
     }
 }
