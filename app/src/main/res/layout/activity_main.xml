@@ -62,7 +62,7 @@
     <EditText
         android:layout_margin="5dp"
         android:hint="Nhap email muon xac thuc"
-        android:layout_below="@id/buttondangnhap"
+        android:layout_below="@id/buttondangky"
         android:id="@+id/edittextemail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -72,6 +72,14 @@
         android:text="Xac thuc email"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/edittextemail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:layout_margin="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/buttonxacthuc"
+        android:text="Reset Password"
+        android:id="@+id/buttonresetpassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </RelativeLayout>
