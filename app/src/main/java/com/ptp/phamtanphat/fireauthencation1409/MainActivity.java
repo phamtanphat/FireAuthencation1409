@@ -18,8 +18,8 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText edtuser,edtpassword;
-    Button btndangky,btndangnhap,btngetuser,btncapnhat;
+    EditText edtuser,edtpassword,edtemail;
+    Button btndangky,btndangnhap,btngetuser,btncapnhat,btnxacthuc;
     private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +94,26 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        btnxacthuc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user != null){
+                    user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()){
+                                Toast.makeText(MainActivity.this, "Da gui email xac thuc", Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast.makeText(MainActivity.this, "Khong gui duoc email", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }else {
+                    Toast.makeText(MainActivity.this, "Khong co nguoi dung xac thuc", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     //Get email
@@ -111,5 +131,7 @@ public class MainActivity extends AppCompatActivity {
         btndangnhap = findViewById(R.id.buttondangnhap);
         btngetuser = findViewById(R.id.buttongetuser);
         btncapnhat = findViewById(R.id.buttcapnhat);
+        btnxacthuc = findViewById(R.id.buttonxacthuc);
+        edtemail = findViewById(R.id.edittextemail);
     }
 }
