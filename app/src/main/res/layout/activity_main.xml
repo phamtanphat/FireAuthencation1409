@@ -89,4 +89,17 @@
         android:id="@+id/buttonphonenumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <EditText
+        android:layout_below="@id/buttonphonenumber"
+        android:hint="Nhap ma xac nhan"
+        android:id="@+id/edittextphone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:layout_centerInParent="true"
+        android:text="Dang nhap ma xac nhan"
+        android:layout_below="@id/edittextphone"
+        android:id="@+id/buttondangnhapphonenumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </RelativeLayout>
